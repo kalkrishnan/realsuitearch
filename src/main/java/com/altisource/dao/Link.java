@@ -10,11 +10,12 @@ import javax.persistence.UniqueConstraint;
 import lombok.Builder;
 import lombok.experimental.Tolerate;
 
+import com.google.gson.GsonBuilder;
+
 @Entity
 @Builder
-@Table(name="link",  uniqueConstraints={
-		   @UniqueConstraint(columnNames={"source", "target","protocol"})
-		})
+@Table(name = "link", uniqueConstraints = { @UniqueConstraint(columnNames = {
+		"source", "target", "protocol" }) })
 public class Link {
 
 	@Id
@@ -52,8 +53,7 @@ public class Link {
 
 	@Override
 	public String toString() {
-		return "{source:" + getSource() + ",target:" + getTarget() + ",value:"
-				+ getValue() + ",protocol:" + getProtocol() + "}";
+		return new GsonBuilder().create().toJson(this);
 	}
 
 }

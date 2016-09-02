@@ -9,15 +9,21 @@ import javax.persistence.Id;
 import lombok.Builder;
 import lombok.experimental.Tolerate;
 
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Builder
 public class Node {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Expose(serialize = false)
 	private int Id;
+	@Expose
 	@Column(unique = true)
 	private String name;
+	@Expose
 	private String type;
 
 	@Tolerate
@@ -35,7 +41,7 @@ public class Node {
 
 	@Override
 	public String toString() {
-		return "{name:" + getName() + "," + "type:" + getType() + "}";
+		return new GsonBuilder().create().toJson(this);
 	}
 
 	public int getId() {

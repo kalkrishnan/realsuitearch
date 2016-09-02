@@ -14,6 +14,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import com.altisource.dao.ArchRepositoryEventHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
@@ -59,5 +60,11 @@ public class REALSuiteArchConfig {
 				new CorsFilter(source));
 		bean.setOrder(0);
 		return bean;
+	}
+
+	@Bean
+	ArchRepositoryEventHandler repoEvenHandler() {
+
+		return new ArchRepositoryEventHandler();
 	}
 }
