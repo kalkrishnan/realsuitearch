@@ -17,6 +17,11 @@ import org.springframework.web.filter.CorsFilter;
 import com.altisource.dao.ArchRepositoryEventHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * Specific configuration for this application
+ * @author krishkal
+ *
+ */
 @Configuration
 public class REALSuiteArchConfig {
 
@@ -26,6 +31,11 @@ public class REALSuiteArchConfig {
 	@Autowired
 	ResourcePatternResolver resourceResolver;
 
+	/**
+	 * Populates the repository with default JSON when empty.
+	 * @return
+	 * @throws IOException
+	 */
 	@Bean
 	public Jackson2RepositoryPopulatorFactoryBean repositoryPopulator()
 			throws IOException {
@@ -40,6 +50,10 @@ public class REALSuiteArchConfig {
 		return factoryBean;
 	}
 
+	/**
+	 * Allows HTTP requests to be made against the Repository from different origins.
+	 * @return
+	 */
 	@Bean
 	public FilterRegistrationBean corsFilter() {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

@@ -16,6 +16,14 @@ import com.altisource.dao.NodeRepository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * The main Service class which provides REST endpoints to do the following:
+ * 1) Retrieve the current architecture
+ * 2) Delete a link between two products using the Source, Product and Protocol
+ * 3) Delete a product
+ * @author krishkal
+ *
+ */
 @RestController
 public class REALSuiteService {
 
@@ -30,7 +38,10 @@ public class REALSuiteService {
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(REALSuiteService.class);
-
+/**
+ * Retrieves the current architecture and returns it as a JSON.
+ * @return String
+ */
 	@CrossOrigin
 	@RequestMapping("/getArchitecture")
 	public String getArchitecture() {
@@ -40,6 +51,12 @@ public class REALSuiteService {
 
 	}
 
+	/**
+	 * Deletes a link between two products 
+	 * @param source -- The source Product
+	 * @param target -- The Target Product
+	 * @param protocol -- The protocol this link uses(HTTP, JDBC)
+	 */
 	@CrossOrigin
 	@Transactional
 	@RequestMapping("/deleteLinkBySourceAndTargetAndProtocol")
@@ -52,6 +69,11 @@ public class REALSuiteService {
 		linkRepo.deleteBySourceAndTargetAndProtocol(source, target, protocol);
 	}
 
+	/**
+	 * Deletes a Node using it's name and Type
+	 * @param name
+	 * @param type
+	 */
 	@Transactional
 	@RequestMapping("/deleteNodeByNameAndType")
 	public void deleteNodeByNameAndType(
