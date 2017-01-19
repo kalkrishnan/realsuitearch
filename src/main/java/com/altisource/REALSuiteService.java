@@ -42,19 +42,19 @@ public class REALSuiteService {
 
 	@CrossOrigin
 	@Transactional
-	@RequestMapping("/deleteBySourceAndTargetAndProtocol")
-	public void deleteBySourceAndTargetAndProtocol(
+	@RequestMapping("/deleteLinkBySourceAndTargetAndProtocol")
+	public void deleteByLinkSourceAndTargetAndProtocol(
 			@RequestParam(value = "source", required = false) String source,
 			@RequestParam(value = "target", required = false) String target,
 			@RequestParam(value = "protocol", required = false) String protocol) {
-		logger.info("Deleting Link: ********************** " + source + "-->"
+		logger.info(REALSuiteService.class.getCanonicalName(), "Deleting Link: ********************** " + source + "-->"
 				+ target + ":" + protocol);
 		linkRepo.deleteBySourceAndTargetAndProtocol(source, target, protocol);
 	}
 
 	@Transactional
-	@RequestMapping("/deleteByNameAndType")
-	public void deleteByNameAndType(
+	@RequestMapping("/deleteNodeByNameAndType")
+	public void deleteNodeByNameAndType(
 			@RequestParam(value = "name", required = false) String name,
 			@RequestParam(value = "type", required = false) String type) {
 		logger.info("Deleting Node: ********************** " + name + ":"

@@ -1,8 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<include resource="org/springframework/boot/logging/logback/base.xml" />
-	<logger name="com.altisource" level="INFO" />
+	<!-- logger name="com.altisource" level="INFO" />
 	<springProfile name="staging">
 		<logger name="com.altisource" level="INFO" />
-	</springProfile>
+	</springProfile-->
+	
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>realsuite.log</file>
+
+    <encoder>
+      <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+    </encoder>
+  </appender>
+
+<appender name="transactions" class="ch.qos.logback.core.rolling.RollingFileAppender">
+   <file value="logs/transactions.log"/>
+ 
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <fileNamePattern>transactions.%d{yyyy-MM-dd}.log</fileNamePattern>
+        <maxHistory>7</maxHistory>
+    </rollingPolicy>
+   <encoder>
+     <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+   </encoder>
+</appender>
+
+<!-- Setup the root category, add the appenders and set the default level -->
+  <root level="INFO">
+    <appender-ref ref="FILE" />
+  </root>
+
+<!-- Specify the level specific to co.myapp.notifier -->
+<logger name="com.altisource.REALSuiteService">
+  <level value="ALL" />
+  <appender-ref ref="transactions" />
+</logger>
+
+<logger name="com.altisource.dao.ArchRepositoryEventHandler">
+  <level value="ALL" />
+  <appender-ref ref="transactions" />
+</logger>
 </configuration>
